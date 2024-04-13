@@ -32,11 +32,19 @@ class _MyHomePageState extends State<MyHomePage>
     data(true, 'Lam Viec', '07:34 PM', '07:34 PM', '2020-1-1', true,
         'Completed'),
     data(true, 'Lam Viec', '07:34 PM', '07:34 PM', '2020-1-1', true,
-        'Completed'),
+        'Favourite'),
     data(true, 'Lam Viec', '07:34 PM', '07:34 PM', '2020-1-1', true,
         'Completed'),
     data(true, 'Lam Viec', '07:34 PM', '07:34 PM', '2020-1-1', true,
         'Completed'),
+    data(true, 'Lam Viec', '07:34 PM', '07:34 PM', '2020-1-1', true,
+        'Uncompleted'),
+    data(true, 'Lam Viec', '07:34 PM', '07:34 PM', '2020-1-1', true,
+        'Completed'),
+    data(true, 'Lam Viec', '07:34 PM', '07:34 PM', '2020-1-1', true,
+        'Completed'),
+    data(true, 'Lam Viec', '07:34 PM', '07:34 PM', '2020-1-1', true,
+        'Favourite'),
   ];
 
   @override
@@ -88,21 +96,26 @@ class _MyHomePageState extends State<MyHomePage>
               ),
             ],
           ),
-          Fragment(
-            tabController: _tabController,
-            listTask: listTask,
+          Expanded(
+            child: Fragment(
+              tabController: _tabController,
+              listTask: listTask,
+            ),
           ),
+          const SizedBox(height: 10,),
           ElevatedButton(
               style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.teal,
-                  padding: const EdgeInsets.symmetric(horizontal: 150, vertical: 7),
-                  textStyle: const TextStyle(
-                      fontWeight: FontWeight.bold)),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 150, vertical: 7),
+                  textStyle: const TextStyle(fontWeight: FontWeight.bold)),
               onPressed: () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (builder) => AddTask()));
               },
-              child:  const Text('Add a task',style: TextStyle(color: Colors.white)))
+              child: const Text('Add a task',
+                  style: TextStyle(color: Colors.white))),
+          const SizedBox(height: 20,)
         ],
       ),
     ));
@@ -118,65 +131,63 @@ class Fragment extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 600,
-      child: TabBarView(
-        controller: tabController,
-        children: <Widget>[
-          Center(
-              child: ListView.builder(
-                  padding: const EdgeInsets.all(8),
-                  itemCount: listTask.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Item(
-                        isChecked: listTask[index].isChecked,
-                        title: listTask[index].title,
-                        to: listTask[index].to,
-                        from: listTask[index].from,
-                        dealine: listTask[index].dealine,
-                        heartChecked: listTask[index].heartChecked);
-                  })),
-          Center(
-              child: ListView.builder(
-                  padding: const EdgeInsets.all(8),
-                  itemCount: getList(listTask, 'Uncomplated').length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Item(
-                        isChecked: listTask[index].isChecked,
-                        title: listTask[index].title,
-                        to: listTask[index].to,
-                        from: listTask[index].from,
-                        dealine: listTask[index].dealine,
-                        heartChecked: listTask[index].heartChecked);
-                  })),
-          Center(
-              child: ListView.builder(
-                  padding: const EdgeInsets.all(8),
-                  itemCount: getList(listTask, 'Completed').length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Item(
-                        isChecked: listTask[index].isChecked,
-                        title: listTask[index].title,
-                        to: listTask[index].to,
-                        from: listTask[index].from,
-                        dealine: listTask[index].dealine,
-                        heartChecked: listTask[index].heartChecked);
-                  })),
-          Center(
-              child: ListView.builder(
-                  padding: const EdgeInsets.all(8),
-                  itemCount: getList(listTask, 'Favourite').length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Item(
-                        isChecked: listTask[index].isChecked,
-                        title: listTask[index].title,
-                        to: listTask[index].to,
-                        from: listTask[index].from,
-                        dealine: listTask[index].dealine,
-                        heartChecked: listTask[index].heartChecked);
-                  })),
-        ],
-      ),
+    return TabBarView(
+      controller: tabController,
+      children: <Widget>[
+        Center(
+            child: ListView.builder(
+                padding: const EdgeInsets.all(8),
+                itemCount: listTask.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Item(
+                      isChecked: listTask[index].isChecked,
+                      title: listTask[index].title,
+                      to: listTask[index].to,
+                      from: listTask[index].from,
+                      dealine: listTask[index].dealine,
+                      heartChecked: listTask[index].heartChecked);
+                })),
+        Center(
+            child: ListView.builder(
+                padding: const EdgeInsets.all(8),
+                itemCount: getList(listTask, 'Uncompleted').length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Item(
+                      isChecked: listTask[index].isChecked,
+                      title: listTask[index].title,
+                      to: listTask[index].to,
+                      from: listTask[index].from,
+                      dealine: listTask[index].dealine,
+                      heartChecked: listTask[index].heartChecked);
+                })),
+        Center(
+            child: ListView.builder(
+                padding: const EdgeInsets.all(8),
+                itemCount: getList(listTask, 'Completed').length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Item(
+                      isChecked: listTask[index].isChecked,
+                      title: listTask[index].title,
+                      to: listTask[index].to,
+                      from: listTask[index].from,
+                      dealine: listTask[index].dealine,
+                      heartChecked: listTask[index].heartChecked);
+                })),
+        Center(
+            child: ListView.builder(
+                padding: const EdgeInsets.all(8),
+                itemCount: getList(listTask, 'Favourite').length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Item(
+                      isChecked: listTask[index].isChecked,
+                      title: listTask[index].title,
+                      to: listTask[index].to,
+                      from: listTask[index].from,
+                      dealine: listTask[index].dealine,
+                      heartChecked: listTask[index].heartChecked);
+                })
+        ),
+      ],
     );
   }
 
